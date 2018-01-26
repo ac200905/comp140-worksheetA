@@ -2,9 +2,10 @@
 //
 #include "stdafx.h"
 #include "WordList.h"
+#include <windows.h>
 
 const int wordLength = 5;
-const int numberOfWords = 15;
+const int numberOfWords = 1;
 
 int main()
 {
@@ -40,5 +41,50 @@ int main()
 
 	// TODO: implement the rest of the game
 
+	std::string userInput;
+
+	bool running = true;
+	int attempts = 4;
+
+	while (running)
+	{
+		std::cin >> userInput;
+
+		if (userInput == secret)
+		{
+			std::cout << "Password Accepted.";
+		}
+
+		else if (attempts >= 0 && userInput != secret)
+		{
+			attempts -= 1;
+
+			int wordLikeness = 0;
+
+			for (char userCharacter : userInput)
+			{
+				for (char secretCharacter : secret)
+				{
+					if (userCharacter == secretCharacter)
+					{
+						wordLikeness += 1;
+					}
+				}
+			}
+
+			std::cout << "Entry denied. " << "Likeness=" << wordLikeness;
+		}
+
+		else
+		{
+			std::cout << "Terminal Locked. Password was: " << secret << ". Exiting...";
+
+			Sleep(3000);
+
+			return 0;
+		}
+	}
+
 	return 0;
 }
+
