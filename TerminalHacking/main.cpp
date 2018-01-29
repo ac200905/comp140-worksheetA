@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <ctype.h>
 
-const int wordLength = 5;
+const int wordLength = 8;
 const int numberOfWords = 15;
 
 int main()
@@ -74,7 +74,7 @@ int main()
 
 		if (userInput == secret)
 		{
-			std::cout << "Password Accepted.";
+			std::cout << "Password Accepted." << '\n';
 
 			Sleep(3000);
 
@@ -84,7 +84,7 @@ int main()
 		//if a word not available is input, reset but don't count as an attempt
 		if (notInList >= numberOfWords)
 		{
-			std::cout << "Invalid Word...";
+			std::cout << "Invalid Word..." << '\n';
 			notInList = 0;
 		}
 
@@ -97,18 +97,16 @@ int main()
 
 			int wordLikeness = 0;
 
-			for (const char userCharacter : userInput)
+			for (int i = 0; i < wordLength; ++i)
 			{
-				for (const char secretCharacter : secret)
-				{
-					if (userCharacter == secretCharacter)
-					{
-						wordLikeness += 1;
-					}
+				if (userInput[i] == secret[i])
+				{						
+					wordLikeness += 1;
 				}
 			}
+		
 
-			std::cout << "Entry denied. " << "Likeness=" << wordLikeness;
+			std::cout << "Entry denied. " << "Likeness=" << wordLikeness << '\n';
 		}
 
 		else if (attempts == 0)
