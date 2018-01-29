@@ -6,7 +6,7 @@
 #include <ctype.h>
 
 const int wordLength = 5;
-const int numberOfWords = 2;
+const int numberOfWords = 15;
 
 int main()
 {
@@ -81,23 +81,25 @@ int main()
 			return 0;
 		}
 
-		
+		//if a word not available is input, reset but don't count as an attempt
 		if (notInList >= numberOfWords)
 		{
 			std::cout << "Invalid Word...";
 			notInList = 0;
 		}
 
-
+		//if not secret word, lower attempt var and calculate number of letters in guess and secret word
 		else if (attempts > 0 && userInput != secret)
 		{
 			attempts -= 1;
 
+			notInList = 0;
+
 			int wordLikeness = 0;
 
-			for (char userCharacter : userInput)
+			for (const char userCharacter : userInput)
 			{
-				for (char secretCharacter : secret)
+				for (const char secretCharacter : secret)
 				{
 					if (userCharacter == secretCharacter)
 					{
