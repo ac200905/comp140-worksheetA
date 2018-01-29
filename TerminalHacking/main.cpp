@@ -3,6 +3,7 @@
 #include "stdafx.h"
 #include "WordList.h"
 #include <windows.h>
+#include <ctype.h>
 
 const int wordLength = 5;
 const int numberOfWords = 1;
@@ -41,19 +42,50 @@ int main()
 
 	// TODO: implement the rest of the game
 
+
+	
+	
 	std::string userInput;
 
 	bool running = true;
 	int attempts = 4;
+	int notInList = 0;
 
 	while (running)
 	{
 		std::cin >> userInput;
 
+		//converts users input to uppercase
+		for (int i = 0; i < userInput.size(); i++) 
+		{
+			userInput.at(i) = toupper(userInput.at(i));
+		}
+
+		//checks if user has chosen a word from the list
+		
+
 		if (userInput == secret)
 		{
 			std::cout << "Password Accepted.";
 		}
+
+		else if (userInput != secret)
+		{
+			for each (std::string word in options)
+			{
+				if (userInput != word)
+				{
+					notInList += 1;
+				}
+
+				if (notInList == 15)
+				{
+					std::cout << "Invalid Word...";
+					notInList = 0;
+				}
+			}
+		}
+
 
 		else if (attempts >= 0 && userInput != secret)
 		{
