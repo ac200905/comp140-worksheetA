@@ -61,7 +61,7 @@ int main()
 			userInput.at(i) = toupper(userInput.at(i));
 		}
 
-		//checks if user has chosen a word from the list
+		//checks if user has chosen a word from the list.
 		
 
 		if (userInput == secret)
