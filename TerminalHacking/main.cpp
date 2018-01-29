@@ -6,7 +6,7 @@
 #include <ctype.h>
 
 const int wordLength = 5;
-const int numberOfWords = 1;
+const int numberOfWords = 2;
 
 int main()
 {
@@ -62,32 +62,34 @@ int main()
 		}
 
 		//checks if user has chosen a word from the list.
-		
+		for each (std::string word in options)
+		{
+			if ((userInput != word) && (userInput != secret))
+			{
+				notInList += 1;
+			}
+
+			
+		}
 
 		if (userInput == secret)
 		{
 			std::cout << "Password Accepted.";
+
+			Sleep(3000);
+
+			return 0;
 		}
 
-		else if (userInput != secret)
+		
+		if (notInList >= numberOfWords)
 		{
-			for each (std::string word in options)
-			{
-				if (userInput != word)
-				{
-					notInList += 1;
-				}
-
-				if (notInList == 15)
-				{
-					std::cout << "Invalid Word...";
-					notInList = 0;
-				}
-			}
+			std::cout << "Invalid Word...";
+			notInList = 0;
 		}
 
 
-		else if (attempts >= 0 && userInput != secret)
+		else if (attempts > 0 && userInput != secret)
 		{
 			attempts -= 1;
 
@@ -107,7 +109,7 @@ int main()
 			std::cout << "Entry denied. " << "Likeness=" << wordLikeness;
 		}
 
-		else
+		else if (attempts == 0)
 		{
 			std::cout << "Terminal Locked. Password was: " << secret << ". Exiting...";
 
