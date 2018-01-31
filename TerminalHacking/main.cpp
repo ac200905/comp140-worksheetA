@@ -5,7 +5,7 @@
 #include <windows.h>
 #include <ctype.h>
 
-const int wordLength = 8;
+const int wordLength = 5;
 const int numberOfWords = 15;
 
 int main()
@@ -43,9 +43,11 @@ int main()
 	// TODO: implement the rest of the game
 
 
-	
-	
 	std::string userInput;
+
+	//function declarations
+	std::string MakeUppercase(std::string string);
+	int CompareLikeness(std::string userInput, std::string secret);
 
 	bool running = true;
 	int attempts = 4;
@@ -55,13 +57,13 @@ int main()
 	{
 		std::cin >> userInput;
 
-		//converts users input to uppercase
-		for (int i = 0; i < userInput.size(); i++) 
-		{
-			userInput.at(i) = toupper(userInput.at(i));
-		}
+		
 
-		//checks if user has chosen a word from the list.
+		//converts users input to uppercase
+		userInput = MakeUppercase(userInput);
+		
+
+		//checks if user has chosen a word from the list
 		for each (std::string word in options)
 		{
 			if ((userInput != word) && (userInput != secret))
@@ -69,9 +71,9 @@ int main()
 				notInList += 1;
 			}
 
-			
-		}
 
+		}
+		//checks if the word is correct
 		if (userInput == secret)
 		{
 			std::cout << "Password Accepted." << '\n';
@@ -88,27 +90,18 @@ int main()
 			notInList = 0;
 		}
 
-		//if not secret word, lower attempt var and calculate number of letters in guess and secret word
+		//if not secret word, lower attempt var and calculate number of characters in guess and secret word
+		//that are the same letter and in the same position
 		else if (attempts > 0 && userInput != secret)
 		{
 			attempts -= 1;
 
 			notInList = 0;
 
-			int wordLikeness = 0;
-
-			for (int i = 0; i < wordLength; ++i)
-			{
-				if (userInput[i] == secret[i])
-				{						
-					wordLikeness += 1;
-				}
-			}
-		
-
-			std::cout << "Entry denied. " << "Likeness=" << wordLikeness << '\n';
+			std::cout << "Entry denied. " << "Likeness=" << CompareLikeness(userInput, secret) << '\n';
 		}
 
+		//if the number of attempts reaches zero then game over
 		else if (attempts == 0)
 		{
 			std::cout << "Terminal Locked. Password was: " << secret << ". Exiting...";
@@ -119,6 +112,35 @@ int main()
 		}
 	}
 
+	
+
 	return 0;
 }
 
+	
+
+//function that takes a string and applies the toupper function to each character
+std::string MakeUppercase(std::string string)
+{
+	for (int i = 0; i < string.size(); i++)
+	{
+		string.at(i) = toupper(string.at(i));
+	}
+	return string;
+}
+
+//function that compares the characters in two strings and increases the likeness value
+//when two characters in the same position are equal
+int CompareLikeness(std::string userInput, std::string secret)
+{
+	int wordLikeness = 0;
+
+	for (int i = 0; i < wordLength; ++i)
+	{
+		if (userInput[i] == secret[i])
+		{
+			wordLikeness += 1;
+		}
+	}
+	return wordLikeness;
+}
