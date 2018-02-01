@@ -50,7 +50,7 @@ int main()
 	int CompareLikeness(std::string userInput, std::string secret);
 
 	bool running = true;
-	int attempts = 4;
+	int attempts = 3;
 	int notInList = 0;
 
 	while (running)
@@ -99,6 +99,7 @@ int main()
 			notInList = 0;
 
 			std::cout << "Entry denied. " << "Likeness=" << CompareLikeness(userInput, secret) << '\n';
+			std::cout << "Attempts remaining: " << attempts+1 << '\n';
 		}
 
 		//if the number of attempts reaches zero then game over
