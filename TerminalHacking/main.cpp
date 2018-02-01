@@ -4,6 +4,7 @@
 #include "WordList.h"
 #include <windows.h>
 #include <ctype.h>
+#include "functions.h"
 
 const int wordLength = 5;
 const int numberOfWords = 15;
@@ -45,10 +46,6 @@ int main()
 
 	std::string userInput;
 
-	//function declarations
-	std::string MakeUppercase(std::string string);
-	int CompareLikeness(std::string userInput, std::string secret);
-
 	bool running = true;
 	int attempts = 3;
 	int notInList = 0;
@@ -57,12 +54,9 @@ int main()
 	{
 		std::cin >> userInput;
 
-		
-
 		//converts users input to uppercase
 		userInput = MakeUppercase(userInput);
-		
-
+	
 		//checks if user has chosen a word from the list
 		for each (std::string word in options)
 		{
@@ -70,14 +64,12 @@ int main()
 			{
 				notInList += 1;
 			}
-
-
 		}
 		//checks if the word is correct
 		if (userInput == secret)
 		{
 			std::cout << "Password Accepted." << '\n';
-
+			//time delay allows the user to read the result before the console closes
 			Sleep(3000);
 
 			return 0;
@@ -106,7 +98,7 @@ int main()
 		else if (attempts == 0)
 		{
 			std::cout << "Terminal Locked. Password was: " << secret << ". Exiting...";
-
+			//time delay allows the user to read the result before the console closes
 			Sleep(3000);
 
 			return 0;
@@ -120,28 +112,3 @@ int main()
 
 	
 
-//function that takes a string and applies the toupper function to each character
-std::string MakeUppercase(std::string string)
-{
-	for (int i = 0; i < string.size(); i++)
-	{
-		string.at(i) = toupper(string.at(i));
-	}
-	return string;
-}
-
-//function that compares the characters in two strings and increases the likeness value
-//when two characters in the same position are equal
-int CompareLikeness(std::string userInput, std::string secret)
-{
-	int wordLikeness = 0;
-
-	for (int i = 0; i < wordLength; ++i)
-	{
-		if (userInput[i] == secret[i])
-		{
-			wordLikeness += 1;
-		}
-	}
-	return wordLikeness;
-}
