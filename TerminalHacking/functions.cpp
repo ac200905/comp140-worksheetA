@@ -2,8 +2,9 @@
 #include "WordList.h"
 #include <windows.h>
 #include <ctype.h>
+#include "main.h"
 
-const int wordLength = 5;
+
 
 
 //function that takes a string and applies the toupper function to each character

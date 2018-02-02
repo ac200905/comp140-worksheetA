@@ -5,9 +5,8 @@
 #include <windows.h>
 #include <ctype.h>
 #include "functions.h"
+#include "main.h"
 
-const int wordLength = 5;
-const int numberOfWords = 15;
 
 int main()
 {
