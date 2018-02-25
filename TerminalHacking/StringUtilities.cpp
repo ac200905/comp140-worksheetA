@@ -8,7 +8,7 @@
 
 
 //function that takes a string and applies the toupper function to each character
-std::string MakeUppercase(std::string userInput)
+std::string MakeUppercase(std::string& userInput)
 {
 	for (int i = 0; i < userInput.size(); i++)
 	{
@@ -17,9 +17,9 @@ std::string MakeUppercase(std::string userInput)
 	return userInput;
 }
 
-//function that compares the characters in two strings and increases the likeness value
-//when two characters in the same position are equal
-int CompareLikeness(const std::string userInput, const std::string secret)
+/*function that compares the characters in two strings and increases the likeness value
+when two characters in the same position are equal*/
+int CompareLikeness(const std::string& userInput, const std::string& secret)
 {
 	int wordLikeness = 0;
 

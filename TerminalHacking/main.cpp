@@ -4,14 +4,14 @@
 #include "WordList.h"
 #include <windows.h>
 #include <ctype.h>
-#include "functions.h"
+#include "StringUtilities.h"
 #include "main.h"
 
 
 int main()
 {
-	// Seed the random number generator with the current time,
-	// to ensure different results each time the program is run
+	/* Seed the random number generator with the current time,
+	to ensure different results each time the program is run*/
 	srand(static_cast<unsigned int>(time(nullptr)));
 
 	// Initialise word list
@@ -41,8 +41,6 @@ int main()
 	}
 
 	// TODO: implement the rest of the game
-
-
 	std::string userInput;
 
 	bool running = true;
@@ -64,6 +62,7 @@ int main()
 				notInList += 1;
 			}
 		}
+
 		//checks if the word is correct
 		if (userInput == secret)
 		{
@@ -81,8 +80,8 @@ int main()
 			notInList = 0;
 		}
 
-		//if not secret word, lower attempt var and calculate number of characters in guess and secret word
-		//that are the same letter and in the same position
+		/*if not secret word, lower attempt var and calculate number of characters in 
+		guess and secret word that are the same letter and in the same position*/
 		else if (attempts > 0 && userInput != secret)
 		{
 			attempts -= 1;
@@ -103,11 +102,26 @@ int main()
 			return 0;
 		}
 	}
-
-	
-
 	return 0;
 }
 
+
+/*
+Psuedocode for an improved algorithm.
+
+While the options for the set are being filled , ensure several words 
+have a higher likeness to the secret word to ensure an easier game. 
+
+
+while (options.size() < numberOfWords)
+	if (options.size() < numberOfWords - (numberOfWords/3))
+		std::string word = words.getRandomWord();
+		compare the likeness of word to the secret word
+			if the likeness is 1 or higher then do:
+				options.insert(word);
+	else 
+		std::string word = words.getRandomWord();
+		options.insert(word);
+*/
 	
 
